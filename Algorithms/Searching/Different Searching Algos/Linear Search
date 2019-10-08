@@ -1,0 +1,46 @@
+#SEARCHING ALGORITHMS
+
+'''
+1.Linear Search in an unsorted list
+
+* known as Sequential Search as it compares element by element
+* time complexity
+Case        Best Case  Worst Case  Average Case
+
+item is present       1  n  n/2
+item is not present   n  n  n
+
+
+def linearSearching(arr,item):
+    for i in arr:
+        if i==item:
+            return 1  #Found
+
+    return -1
+
+arr = [ 2, 3, 4, 1, 40 ]
+x = 10
+
+print(linearSearching(arr,x))
+'''
+#########################################################
+'''
+2. Linear Search in sorted list
+
+*it only improvises the time complexity by (Reducing the comparsions)
+and for absent item, still the worst case runtime is o(n)
+'''
+
+def linearSearchinginSortedList(arr,item):
+    for i in arr:
+        if i>item:
+            return -1
+        elif i==item:
+            return 1  #Found
+
+    return -1
+
+arr = [ 2, 3, 4, 10, 40 ]
+x = 10
+
+print(linearSearchinginSortedList(arr,x))

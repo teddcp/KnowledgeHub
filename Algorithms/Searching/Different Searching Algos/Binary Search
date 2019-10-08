@@ -1,0 +1,86 @@
+#2 Binary Search
+'''
+*divide and conquer strategy :we should note that this algorithm is a great example of a divide and conquer strategy.
+    Divide and conquer means that we divide the problem into smaller pieces, solve the smaller pieces in some way,
+    and then reassemble the whole problem to get the result.
+    When we perform a binary search of a list, we first check the middle item.
+    If the item we are searching for is less than the middle item, we can simply perform a binary search of the left half of the original list.
+    Likewise, if the item is greater, we can perform a binary search of the right half.
+    Either way, this is a recursive call to the binary search function passing a smaller list.
+
+*If we start with n items, about n/2 items will be left after the first comparison.
+  After the second comparison, there will be about n/4. Then n/8, n/16, and so on. 
+  The number of comparisons necessary to get to this point is i where n2i=1.
+  Solving for i gives us i=logn.
+  The maximum number of comparisons is logarithmic with respect to the number of items in the list.
+  Therefore, the binary search is O(logn).
+
+*For n = 8, the output of log2 n comes out to be 3, which means the array can be halved 3 times maximum,
+ hence the number of steps(at most) to find the target value will be (3 + 1) = 4.
+
+ (logn+1)
+
+*The time complexity of Binary Search can be written as
+  T(n) = T(n/2) + c
+
+* Auxiliary Space: O(1) in case of iterative implementation.
+    In case of recursive implementation, O(Logn) recursion call stack space.
+#########################Iterative
+def BinarySearchlterative(numbersList, value):
+    low = 0
+    high = len(numbersList)-1
+
+    while low <= high:
+        mid = (low+high)//2
+        if numbersList[mid] > value:
+            high = mid-1
+        elif numbersList[mid] <value:
+            low= mid+l
+        else: return mid
+
+    return - 1
+
+
+A = [1534,246,933, 127,277,321,454,565,2201]
+print(BinarySearchlterative(A,277)) 
+
+'''
+##########################RECURSIVE
+
+# Returns index of x in arr if present, else -1
+def binarySearch (arr, l, r, x):
+ 
+    # Check base case
+    if l <= r:
+ 
+        mid = (l+r)//2
+ 
+        # If element is present at the middle itself
+        if arr[mid] == x:
+            return mid
+         
+        # If element is smaller than mid, then it 
+        # can only be present in left subarray
+        elif arr[mid] > x:
+            return binarySearch(arr, l, mid-1, x)
+ 
+        # Else the element can only be present 
+        # in right subarray
+        else:
+            return binarySearch(arr, mid+1, r, x)
+ 
+    else:
+        # Element is not present in the array
+        return -1
+ 
+# Test array
+arr = [ 2, 3, 4, 10, 40 ]
+x = 100
+ 
+# Function call
+result = binarySearch(arr, 0, len(arr)-1, x)
+ 
+if result != -1:
+    print ("Element is present at index %d" % result)
+else:
+    print ( "Element is not present in array")

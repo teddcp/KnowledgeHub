@@ -58,6 +58,20 @@ Solution 1: //Binary search
             b=x/a
         
         return int(a)
+        
+   Using Logarithimic
+       pow(2, 0.5 * math.log2(n))
+       
+     Explanation:
+     let d be our answer for input number n
+        then n(1/2) = d 
+     apply log2 on both sides
+      log2(n(1/2)) = log2(d)
+      log2(d) = 1/2 * log2(n)
+      d = 2(1/2 * log2(n)) 
+      d = pow(2, 0.5*log2(n)) 
+      
+      
  #############################################################33
  If the question asks, to find the real integer square, we have to find the precision also
  

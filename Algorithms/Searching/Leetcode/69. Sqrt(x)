@@ -58,6 +58,23 @@ Solution 1: //Binary search
             b=x/a
         
         return int(a)
-    
+ #############################################################33
+ If the question asks, to find the real integer square, we have to find the precision also
+ 
+ 1. find the integral sqrt part as above
+ 2.find the precision
+ 
+             # For computing the fractional part 
+             # of square root upto given precision 
+             increment = 0.1
+             for i in range(0, precision):  
+                 while (ans * ans <= number): 
+                     ans += increment 
+
+                 # loop terminates when ans * ans > number 
+                 ans = ans - increment 
+                 increment = increment / 10
+                 
+ #O(log(number) + precision) which is approximately equal to O(log(number)).
     
  

@@ -19,6 +19,9 @@ Thus if we're searching the word "career" in the dictionary, you know that it sh
 This is because we know the order of the letlers, we know the interval (a-z), and somehow we intuitively know that the words arc dispersed equally.
 These facts arc enough to realize that the binary search can be a bad choice.
 Indeed the binary search algorithm divides the list in two equal sub-lists, which is useless if we know in advance that lhe searched item is somewhere in I he beginning or the end of the list.
+
+Whereas binary search starts in the middle and always divides into two, interpolation search calculates the likely position of the element and checks the index, making it more likely to find the element in a smaller number of iterations.
+
 Yes, we can use also jump search if the item is al lhe beginning, bul not if it is at the encl, in that case Lhis algorithm is not so effeclive. 
 
 * In interpolation-sequential search, interpolation is used to find an item near the one being searched for,
@@ -27,49 +30,18 @@ Yes, we can use also jump search if the item is al lhe beginning, bul not if it 
 *Time Complexity: If elements are uniformly distributed, then O (log log n)).
                   In worst case it can take upto O(n). ( values of the keys increase exponentially)
 Auxiliary Space: O(1)
+
 '''
-def interpolationSearch(arr, n, x): 
-    # Find indexs of two corners 
-    lo = 0
-    hi = (n - 1)
-   
-    # Since array is sorted, an element present 
-    # in array must be in range defined by corner 
-    while lo <= hi and x >= arr[lo] and x <= arr[hi]: 
-        if lo == hi: 
-            if arr[lo] == x:  
-                return lo; 
-            return -1; 
-          
-        # Probing the position with keeping 
-        # uniform distribution in mind. 
-        pos  = lo + int(((float(hi - lo) / 
-            ( arr[hi] - arr[lo])) * ( x - arr[lo]))) 
-  
-        # Condition of target found 
-        if arr[pos] == x: 
-            return pos 
-   
-        # If x is larger, x is in upper part 
-        if arr[pos] < x: 
-            lo = pos + 1; 
-   
-        # If x is smaller, x is in lower part 
-        else: 
-            hi = pos - 1; 
-      
+def interpolationSearch(arr, n, x):
+    low = 0
+    high = (n - 1)
+    while low <= high and x >= arr[low] and x <= arr[high]:
+        mid = low + int(
+            ((float(high - low) / (arr[high] - arr[low])) * (x - arr[low])))
+        if arr[mid] == x:
+            return mid
+        if arr[mid] < x:
+            low = mid + 1
+        else:
+            high = mid - 1
     return -1
-  
-# Driver Code 
-# Array of items oin which search will be conducted 
-arr = [10, 12, 13, 16, 18, 19, 20, 21,22, 23, 24, 33, 35, 42, 47] 
-n = len(arr) 
-  
-x = 18 # Element to be searched 
-index = interpolationSearch(arr, n, x) 
-  
-if index != -1: 
-    print( "Element found at index",index) 
-else:
-    print( "Element not found")
-  

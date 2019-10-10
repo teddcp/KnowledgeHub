@@ -1,0 +1,31 @@
+Which of the above two does less comparisons in worst case?
+
+From the first look, it seems the ternary search does less number of comparisons as it makes Log3n recursive calls, but binary search makes Log2n recursive calls. Let us take a closer look.
+
+The following is recursive formula for counting comparisons in worst case of Binary Search.
+ T(n) = T(n/2) + 2,  T(1) = 1
+ 
+The following is recursive formula for counting comparisons in worst case of Ternary Search.
+T(n) = T(n/3) + 4, T(1) = 1
+
+In binary search, there are 2Log2n + 1 comparisons in worst case. 
+In ternary search, there are 4Log3n + 1 comparisons in worst case.
+
+Time Complexity for Binary search = 2clog2n + O(1)
+Time Complexity for Ternary search = 4clog3n + O(1)
+
+Therefore, the comparison of Ternary and Binary Searches boils down the comparison of expressions 2Log3n and Log2n . 
+
+The value of 2Log3n can be written as (2 / Log23) * Log2n . 
+
+Since the value of (2 / Log23) is more than one, Ternary Search does more comparisons than Binary Search in worst case.
+---------------------------------------
+
+binary search makes 2 comparsions while ternary makes 4 .
+
+
+As a fun exercise, let's think about d-ary search, where you look at (d - 1) evenly-spaced elements of the array, then decide which of d different intervals to recursively descend into. If you use d-ary search, the size of the array remaining at each point will be n, n / d, n / d2, n / d3, ..., n / dk, ... . This means that there will be logd n layers in the recursion. At each layer, you make exactly d - 1 comparisons. This means that the total number of comparisons made is (d - 1) logd n. For any fixed value of d, this is O(log n), though the constant factor will be different.
+
+With binary search, d = 2, and the number of comparisons will be (roughly) (2 - 1) log2 n = log2 n. For simplicity, let's write that as a natural logarithm by writing it as ln n / ln 2 = 1.443 ln n.
+
+With ternary search, d = 3, and the number of comparisons will be (roughly) (3 - 1) log3 n = 2 log3 n. Writing this as a natural log, we get that this is 2 ln n / ln 3 = 1.820 ln n. Therefore, the number of comparisons in ternary search is indeed bigger than the number of comparisons in binary search, so you'd expect it to be slower than binary search. Indeed, as this article points out, that's what happens in practice.

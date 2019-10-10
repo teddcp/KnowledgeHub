@@ -1,0 +1,64 @@
+#Jump Search
+
+'''
+Algorithm
+
+The steps involved in this algorithm are:
+(Block size: B and list size: N; list is sorted in ascending order)
+
+Step 1: Start from index 1
+Step 2: Jump head by B elements. Current position = Current position + B. If position is out of element list, set current position to last position.
+Step 3: If element at current position < target element, then do Linear Search on element from position current position -B to current position else go to step 2. If current position is last position, go to step 4.
+Step 4: Exit. Element not found.
+
+
+** How is the perfect block size √N? **
+Consider the list to be of size N and Block size of size B.
+In the worst case, we have to do N/B jumps and if the element is not present, we perform B-1 comparisons. Therefore, the total number of comparisons in the worst case will be ((N/B) + B-1). The value of the function ((N/B) + B-1) will be minimum when B = √N.
+Therefore, the best block size is B = √N.
+
+This makes the time complexity of Jump Search O(√ n).
+
+Applications
+If jumping back in a list takes significantly more time than jumping forward then one should use this algorithm.
+
+***Can we replace linear search in jump search by binary search?
+The use case for jump search (O(√n)) over binary search (O(log n)) is when jumping back is expensive.
+Replacing the linear search in jump search would be counterproductive in this use case.
+
+'''
+
+import math
+def search(arr,n,k):
+    jump=int(math.sqrt(n))
+    l,r=0,0
+
+    #find the range
+    while l<n and arr[l]<= k:
+        r=min(n-1,l+jump)
+
+        if arr[l]<=x and arr[r]>=x:
+            break
+        l+=jump
+
+    if l>=n or arr[l]>x:
+        return -1
+
+    r=min(n-1,r)
+    temp=l
+
+    #Linear search
+    while temp<=r and arr[temp]<=x:
+        if arr[temp]==x:
+            return temp
+        temp+=1
+
+    return -1
+
+arr = [ 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610 ] 
+x = 55
+n = len(arr) 
+  
+# Find the index of 'x' using Jump Search 
+index = search(arr, x, n)
+print(index)

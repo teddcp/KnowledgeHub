@@ -1,4 +1,4 @@
-Jump Search
+Exponential Search
 
 1.Jump the array 2^i elements at a time searching for the condition  in Array[2^(i-1)] < valueWanted < Array[2^i]. 
   If 2^i is greater than the lenght of array, then set the upper bound to the length of the array.

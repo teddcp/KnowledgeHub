@@ -1,0 +1,40 @@
+Jump Search
+
+1.Jump the array 2^i elements at a time searching for the condition  in Array[2^(i-1)] < valueWanted < Array[2^i]. 
+  If 2^i is greater than the lenght of array, then set the upper bound to the length of the array.
+
+2. Do a binary search between Array[2^(i-1)] and Array[2^i]
+
+code:
+
+def exponentialSearch(arr, n, x): 
+    # IF x is present at first  
+    # location itself 
+    if arr[0] == x: 
+        return 0
+          
+    # Find range for binary search  
+    # j by repeated doubling 
+    i = 1
+    while i < n and arr[i] <= x: 
+        i = i * 2
+      
+    # Call binary search for the found range 
+    return binarySearch( arr, i / 2,  
+                         min(i, n), x) 
+      
+
+
+Time complexity :
+
+The first stage of the algorithm where the range is determined takes O(log i) time, where i is the index of the searched element in the input array.
+Second stage where Binary search is done also takes O(log i) for the given range. So the total time taken is 2*O(log i). 
+Thus the time complexity of Exponential search is O(log i).In its worst case, the time complexity is O(log n), when the last item is the item we are searching for (n being the length of the array).
+Space complexity of Exponential search is O(1), for recursive implementation of Binary search method calls are stacked for each recursive call making the space complexity as O(log i) in that case.
+
+O(log i) where i is the index of array
+worst case: O(log n)
+
+Application
+Exponential Binary Search is useful for unbounded searches where size of array is infinite.
+It works better than Binary Search for bounded arrays when the element to be searched is closer to the beginning of the array.

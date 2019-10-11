@@ -1,0 +1,63 @@
+
+
+Solution 1: Linear search
+
+    n=int(input())
+    arr=list(map(int,input().split()))
+    x=[]
+   
+    for i,ele in enumerate(arr):
+       
+        if i == ele:
+            x.append(ele)
+    
+    if len(x)==0:
+        print('Not Found')
+    else:
+        print(*x)
+---------------------------------------------
+Solution2: Binary Search
+
+def binary_search(arr,l,r):
+    x=[]    
+    while l<=r:
+        m=(l+r)>>1
+                   
+        if arr[m]==m:
+            return( m)
+            
+        elif arr[m]<m:
+            l=m+1
+        else:
+            r=m-1
+    return -1
+###################################################################################
+****IF DUPLICATES ARE ALLOWED
+So, the general pattern of our search would be:
+
+Left Side: start = start, end = min(arr[midIndex], midIndex-1)
+Right Side: start = max(arr[midIndex], midIndex+1), end = end
+
+def magicIndex(arr, start, end): 
+  
+    # If No Magic Index return -1  
+    if (start > end): 
+        return -1
+  
+    midIndex = int((start + end) / 2)  
+    midValue = arr[midIndex]  
+  
+    # Magic Index Found, return it. 
+    if (midIndex == midValue): 
+        return midIndex  
+  
+    # Search on Left side 
+    left = magicIndex(arr, start, min(midValue, midIndex - 1))  
+  
+    # If Found on left side, return. 
+    if (left >= 0): 
+        return left  
+  
+    # Return ans from right side. 
+    return magicIndex(arr, max(midValue, midIndex + 1),  end)  
+  

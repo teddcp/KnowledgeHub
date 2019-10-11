@@ -21,7 +21,7 @@ def exponentialSearch(arr, n, x):
       
     # Call binary search for the found range 
     return binarySearch( arr, i / 2,  
-                         min(i, n), x) 
+                         min(i, n-1), x) 
       
 
 

@@ -25,6 +25,8 @@ Base cases:
         
         while l<r:   #or nums[l]>nums[r] => we have to make it as num[l]<num[r]  
             #we can add here one condition : if num[l]<num[r],return num[l]
+            #or if r-l==1: return nums[r]    #min(nums[l],nums[r])
+            
                 m=(l+r)>>1
                 
                 if nums[m]<nums[r]:

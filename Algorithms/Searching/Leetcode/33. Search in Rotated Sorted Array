@@ -1,0 +1,48 @@
+Logic :
+
+In order to account for the pivot, we introduce the following conditions:
+
+If start is less than mid than the list is in increasing order:
+
+If Start <= target < mid: The target must be between start and mid
+Else: Target must be between mid and end
+Start is greater than mid, list is pivoted somewhere in the middle of start and mid
+
+If mid < target < start: The target must be between mid and end
+Else: Target must be between start and mid
+
+
+
+
+class Solution(object):
+    def search(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+       l=0
+        h=len(nums)-1
+        
+        while l<=h :
+            m=(l+h)>>1
+            
+            if nums[m]==target:
+                return m
+            #equals for when there is 2 element, low and mid point to same element
+            elif nums[l]<=nums[m]:  
+                if nums[l]<=target <nums[m]:
+                    h=m-1
+                else:
+                    l=m+1
+            else: 
+                if nums[m]<target <=nums[h]:
+                    l=m+1
+                else:
+                    h=m-1
+            
+        
+        return -1
+                    
+                    
+            

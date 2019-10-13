@@ -1,4 +1,8 @@
 Logic:
+
+All the elements to the left of inflection point > first element of the array.
+All the elements to the right of inflection point < first element of the array.
+
 1. [6701245]. let its be an array (rotated less than half time) => pivolt will lie in right part, hence minium
    [mid:end] is sorted , hence min wont lie in [mid+1:end].We have to look in [Start:mid]
    mid is considered as there is a possibility that mid is a minium element

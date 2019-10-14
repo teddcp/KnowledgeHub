@@ -1,102 +1,27 @@
-Skip to content
-Search or jump to…
+There are only three ways in which arr[left], arr[mid], arr[right] can be ordered:
 
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@deba999 
-1
-00deba999/Algorithms_PY
- Code Issues 0 Pull requests 0 Projects 0 Wiki Security Insights Settings
-Algorithms_PY/Searching/problems/Sorted And Rotated/Find the maximum element
-@deba999 deba999 Rename Fidn the maximum and minimum element to Find the maximum element
-91c1a4b 28 days ago
-86 lines (64 sloc)  1.85 KB
-  
+arr[left] < arr[mid] < arr[right]: the maximum value is arr[right]
 
-'''
-If someone asks for the number of times it is rorated
-r= index of min 
- = index of max + 1
-'''
+arr[mid]  < arr[right] < arr[left]: the maximum value is at the left side of mid
 
-##############################Find the pivolt elemeent or maxium element
-def findMax(arr, low, high): 
-  
-    # This condition is for the case when 
-    # array is not rotated at all 
-    if (high < low): 
-        return arr[0] 
-  
-    # If there is only one element left 
-    if (high == low): 
-        return arr[low] 
-  
-    # Find mid 
-    mid = low + (high - low) // 2
-  
-    # Check if mid itself is maximum element 
-    if (mid < high and arr[mid + 1] < arr[mid]): 
-        return arr[mid] 
-      
-    # Check if element at (mid - 1) is maximum element 
-    # Consider the cases like {4, 5, 1, 2, 3} 
-    if (mid > low and arr[mid] < arr[mid - 1]): 
-        return arr[mid - 1] 
-  
-    # Decide whether we need to go to 
-    # the left half or the right half 
-    if (arr[low] > arr[mid]): 
-        return findMax(arr, low, mid - 1) 
-    else: 
-        return findMax(arr, mid + 1, high) 
-  
-#######################################
+arr[right] < arr[left] < arr[mid]: the maximum value is at the right side of mid.
 
-#Find the maxium in  iteration : handles duplicates
-def find(arr,l,h):
-
-    #array is not sorted
-    if arr[l]<arr[h]:
-        return arr[0]
-    if l==h:
-        return arr[l]
-
-    while l<=h:
-        m=(l+h)//2
-
-        #mid is the maximumpoint
-        if m<h and arr[m]>arr[m+1]:
-            return arr[m]
-
-        #mid-1 is the maxium element
-        if m>l and arr[m]<arr[m-1]:
-            return arr[m-1]
-        
-        #To handle duplicates decrement one pointer
-        #decide :which side to go to find the maxium element
-        if arr[h]>arr[m]:
-            h=m-1
-        elif arr[h]<arr[m]:
-            l=m+1
-        else:
-            h-=1
-            
-    return arr[0]
+Any other ordering would violate the condition that the list is a rotated, sorted list.
 
 
-#O(n) Algo
-#For duplicates
-def findMin1(arr,n):
-    if n==0:
-        return 0
-    m=arr[0]
+def find_max(arr,length):
+    left=0
+    right=length-1
 
-    for i in range(1,n):
-        if arr[i]>m:
-            m=arr[i]
+    while left<right :
+            if arr[left] < arr[right]:
+                    return arr[right] 
 
-    return m
+            mid=(left+right)>>1
 
+            if arr[mid]>arr[right]:
+                    left=mid
+            else:
+                    right=mid-1
+
+    return arr[left]

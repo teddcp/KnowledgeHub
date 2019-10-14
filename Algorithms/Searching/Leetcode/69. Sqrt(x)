@@ -46,7 +46,7 @@ Solution 1: //Binary search
         
         return i-1
  
- Solution 4 #Babylonian Approach logn
+ Solution 4 #Babylonian Approach loglogn
  def mySqrt(self, x: int) -> int:
         a=x
         b=1

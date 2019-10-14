@@ -1,0 +1,71 @@
+solution 1: O(n)
+
+1.
+
+for (i : 1 to length of array) {
+            if (A[i - 1] < A[i] && A[i] > A[i + 1]) { return i; }
+        }
+        return -1; // no peak.
+ or
+ Since the problem is guaranteed to have one and only one peak, we can simplify the above O(n) 
+ 
+ for (i : 1 to length ) {
+            if A[i] > A[i + 1]) { return i; }
+        }
+        return -1; // no peak.
+
+Binary search
+----------------------
+This question only needs to compare midand mid+1point to the value, because it is considered mid+1, so the condition of the loop is left<rightthat the return value is left(if the condition is left<=right, when both right and left point to the last element, this while midalso pointing to the last element, mid+1not within the scope), keeping in mind leftand rightupdate, if nums[mid]<nums[mid+1], at this time midmust be in the left side of the mountain, so the update left=mid+1, if nums[mid]>=nums[mid+1], at this time midmay be on the right side of the mountain, the mountain itself is also possible that, it is not Yes right=mid-1, it should be right=mid, this is to prevent midthe mountain peaks from being missed, and then jumping to the left of the mountain leads to a situation where no value can be found. Python code:
+
+class Solution(object):
+    def peakIndexInMountainArray(self, A):
+        """
+        :type A: List[int]
+        :rtype: int
+        """
+        l=0
+        r=len(A)-1
+        
+        while l<r:
+            m=(l+r)//2
+            
+            if A[m]<A[m+1]:
+                l=m+1
+            else:
+                r=m
+        
+        return l
+
+Golden section Search :
+---------------------------------
+It's gurentee only one peak, we can apply golden-section search.
+
+https://medium.com/datadriveninvestor/golden-section-search-method-peak-index-in-a-mountain-array-leetcode-852-a00f53ed4076
+
+
+def peakIndexInMountainArray(self, A):
+    phi_inv = 1 / ((math.sqrt(5) + 1) / 2)
+
+    def cal_x1(left,right):
+        return right - (round((right-left) * phi_inv))
+    def cal_x2(left,right):
+        return left + (round((right-left) * phi_inv))
+
+    left, right = 0, len(A)-1
+    x1, x2 = cal_x1(left, right), cal_x2(left,right)
+    while x1 < x2:
+        if A[x1] < A[x2]:
+            left = x1
+            x1 = x2
+            x2 = cal_x1(x1,right)
+        else:
+            right = x2
+            x2 = x1
+            x1 = cal_x2(left,x2)
+    return x1
+    
+    If we pay attention to the reduction of the search space after each iteration: the convergence rate is a constant 1/ϕ = 0.61803 (search space is reduced by 38.196% each iteration). While binary search (bisection search) converges linearly with the rate of 1/2.
+    
+    Golden section search and binary search usually have different use cases:
+1) binary search for a sorted array; 2) golden section search for a unimodal function in a given range.

@@ -46,7 +46,7 @@ Solution 1: //Binary search
         
         return i-1
  
- Solution 4 #Babylonian Approach loglogn ??Doubt
+ Solution 4 #Babylonian Approach logn
  def mySqrt(self, x: int) -> int:
         a=x
         b=1
@@ -58,7 +58,14 @@ Solution 1: //Binary search
             b=x/a
         
         return int(a)
+  or |||||||||||||||||||||||||||||||||||||||
+   t=x
         
+        while t**2 >x :
+            t=int(0.5 *(t+(x//t)))
+        
+        return t
+       ----------------------------------------
    Using Logarithimic
        pow(2, 0.5 * math.log2(n))
        

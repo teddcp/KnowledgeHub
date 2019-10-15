@@ -25,6 +25,10 @@
 
 * Auxiliary Space: O(1) in case of iterative implementation.
     In case of recursive implementation, O(Logn) recursion call stack space.
+    
+ Overflow study : https://thebittheories.com/the-curious-case-of-binary-search-the-famous-bug-that-remained-undetected-for-20-years-973e89fc212
+ if we allocate an array of size 2^31 -1 (maxium size for 32 bit), then there will be a case of overflow while calculating the mid.
+ 
 #########################Iterative
 def BinarySearchlterative(numbersList, value):
     low = 0

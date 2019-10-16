@@ -29,6 +29,6 @@ As a fun exercise, let's think about d-ary search, where you look at (d - 1) eve
 With binary search, d = 2, and the number of comparisons will be (roughly) (2 - 1) log2 n = log2 n. For simplicity, let's write that as a natural logarithm by writing it as ln n / ln 2 = 1.443 ln n.
 
 With ternary search, d = 3, and the number of comparisons will be (roughly) (3 - 1) log3 n = 2 log3 n. Writing this as a natural log, we get that this is 2 ln n / ln 3 = 1.820 ln n. Therefore, the number of comparisons in ternary search is indeed bigger than the number of comparisons in binary search, so you'd expect it to be slower than binary search. Indeed, as this article points out, that's what happens in practice.
-
+.
 https://cs.stackexchange.com/questions/115674/number-of-comparisons-in-searching-algorithms
 https://www.geeksforgeeks.org/the-ubiquitous-binary-search-set-1/

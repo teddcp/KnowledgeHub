@@ -48,7 +48,6 @@ def search(arr,n,k):
         if arr[temp]==x:
             return temp
         temp+=1
-
     return -1
 
 arr = [ 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610 ] 

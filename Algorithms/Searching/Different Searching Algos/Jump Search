@@ -1,5 +1,4 @@
 #Jump Search
-
 '''
 Algorithm
 
@@ -11,12 +10,10 @@ Step 2: Jump head by B elements. Current position = Current position + B. If pos
 Step 3: If element at current position < target element, then do Linear Search on element from position current position -B to current position else go to step 2. If current position is last position, go to step 4.
 Step 4: Exit. Element not found.
 
-
 ** How is the perfect block size √N? **
 Consider the list to be of size N and Block size of size B.
 In the worst case, we have to do N/B jumps and if the element is not present, we perform B-1 comparisons. Therefore, the total number of comparisons in the worst case will be ((N/B) + B-1). The value of the function ((N/B) + B-1) will be minimum when B = √N.
 Therefore, the best block size is B = √N.
-
 This makes the time complexity of Jump Search O(√ n).
 
 Applications
@@ -27,7 +24,6 @@ The use case for jump search (O(√n)) over binary search (O(log n)) is when jum
 Replacing the linear search in jump search would be counterproductive in this use case.
 
 '''
-
 import math
 def search(arr,n,k):
     jump=int(math.sqrt(n))

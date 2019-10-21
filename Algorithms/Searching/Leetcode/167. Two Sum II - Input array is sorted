@@ -1,0 +1,64 @@
+Hint: As given array is sorted, we might use two pointer technique / binary search.
+
+
+#Binary Search
+Consider each element and find is (target-nums[i]) exist in array range [i+1,N-1]? (If yes, we are done), else increment one step, then again search the element exist in array.
+
+'''
+time complexity: O(NlogN) in worst (if elements are together in right extreme)
+space complexity: O(1)
+'''
+ def twoSum(self, nums, target):
+        """
+        :type numbers: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        n=len(nums)
+        for i in range(n):
+            l=i+1
+            r=n-1
+            k=target-nums[i]
+            
+            while l<=r:
+                m=(l+r)//2
+                
+                if nums[m]==k:
+                    return [i+1,m+1]
+                elif nums[m]<k:
+                    l=m+1
+                else:
+                    r=m-1
+                    
+ 
+ #hashing will work also
+ 
+ #2 pointer
+ Two pointer technique.
+
+We can exploit the sorted property of an array.
+Let's say for indices i & j such that i<j,
+if sum of elements A[i]+A[j] == target, then we are done
+else check whether A[i]+A[j] > target, then last element has to be removed to reduce the value of sum (j--).
+similarly if A[i]+A[j] < target, we have to add little to increase the sum (i++).
+
+ def twoSum(self, nums, target):
+        """
+        :type numbers: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        n=len(nums)
+        l=0
+        r=n-1
+        
+        while l<r:
+            s=nums[l]+nums[r]
+            
+            if s==target:
+                return [l+1,r+1]
+            elif s>target:
+                r-=1
+            else:
+                l+=1
+        return {}

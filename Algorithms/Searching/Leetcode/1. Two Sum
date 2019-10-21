@@ -1,0 +1,31 @@
+#Solution 1  o(n^2)
+        n=len(nums)
+        for i in range(0,n-1):
+            for j in range(i+1,n):
+                if nums[i]+nums[j]==target:
+                    return [i,j]
+         """
+#solution 2: O(n),but space complexity is O(n)
+
+#2 pass 
+#edge case : sum=6,arr={3},works but wrong
+        d={}
+        n=len(nums)
+        for i in range(n):
+            d.setdefault(nums[i],0)
+            d[nums[i]]=i
+        print(d)   
+        for i in range(n):   
+            if target-nums[i] in d and d[target-nums[i]] != i:
+        return (i,d[target-nums[i]])
+        
+        
+#One pass
+        d={}
+        n=len(nums)
+        for i in range(n):
+            if target-nums[i] in d : #and d[target-nums[i]] != i:
+                return (i,d[target-nums[i]])
+            print(d)
+            d[nums[i]]=i   
+        

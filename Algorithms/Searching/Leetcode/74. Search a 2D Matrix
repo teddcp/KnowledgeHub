@@ -14,6 +14,13 @@ Solution 1: 2 nested loops : O(n^2)
     
     ----------------------------------------
 Solution 2: o(M+N)
+
+search from right up corner:row=0,col=m-1
+
+if matrix[row][col] is equal target,return true.
+if matrix[row][col] is less than target, row++; indicate that this row can't contain target.because this one in this line is the biggest one,counting from 'row'.
+if matrix[row][col] is greater than target,col--; indicate that this column can't contain target.because this one in this column is the smallest one,counting from 'col'.
+
         def searchMatrix(self, matrix, target):
         """
         :type matrix: List[List[int]]

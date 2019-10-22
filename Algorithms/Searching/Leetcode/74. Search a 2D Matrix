@@ -1,0 +1,122 @@
+Solution 1: 2 nested loops : O(n^2)
+
+        if len(matrix)==0 or len(matrix[0])==0 : 
+            return False
+        
+        r=len(matrix)
+        c=len(matrix[0])
+        
+        for i in range(r):
+            for j in range(c):
+                if matrix[i][j]==target:
+                    return True
+        return False
+    
+    ----------------------------------------
+Solution 2: o(M+N)
+        def searchMatrix(self, matrix, target):
+        """
+        :type matrix: List[List[int]]
+        :type target: int
+        :rtype: bool
+        """
+        if len(matrix)==0 or len(matrix[0])==0 : 
+            return False
+        
+        r=0
+        c=len(matrix[0])-1
+        
+        while r<len(matrix) and c>=0:
+            if matrix[r][c]==target :
+                return True
+            elif matrix[r][c] < target:
+                r+=1
+            else:
+                c-=1
+        
+        
+        return False
+ ----------------------------------------------------------
+Solution 3 : 2 binary search   O(lgm+lgn)
+
+1.first find the row using binary search
+2.find the position in that row as that row is an sorted array itself
+
+        def searchMatrix(self, matrix, target):
+        """
+        :type matrix: List[List[int]]
+        :type target: int
+        :rtype: bool
+        """
+        if len(matrix)==0 or len(matrix[0])==0 : 
+            return False
+        
+        r=len(matrix)
+        c=len(matrix[0])
+        
+        l=0
+        h=r-1
+        arr=[]
+        
+        while l<=h:
+            m=(l+h)//2
+            if matrix[m][0]<=target and target<=matrix[m][c-1]:
+                #do Binary search in that row
+                arr=matrix[m]
+                break
+            elif matrix[m][0]>target:
+                h=m-1
+            else:
+                l=m+1
+        if len(arr)==0:
+            return False
+        l=0
+        h=c-1
+        
+        while l<=h:
+            m=(l+h)//2
+            if arr[m]==target:
+                return True
+            elif arr[m]<target:
+                l=m+1
+            else:
+                h=m-1
+        return False
+
+--------------------------------------------------------------------------------------
+//Solution4 is modified of solution3
+Solution 4:   
+Use binary search. think the matrix as sorted array from 0 to m*n-1.
+
+n * m matrix convert to an array => matrix[x][y] => a[x * m + y]
+an array convert to n * m matrix => a[x] =>matrix[x / m][x % m];
+
+O(lg mn)
+        def searchMatrix(self, matrix, target):
+                """
+                :type matrix: List[List[int]]
+                :type target: int
+                :rtype: bool
+                """
+                if len(matrix)==0 or len(matrix[0])==0 : 
+                    return False
+                r=len(matrix)
+                c=len(matrix[0])
+
+                l=0
+                h=r*c-1
+
+                while l<=h:
+                    m=(l+h)//2
+                    mx=m//c
+                    my=m%c
+
+                    if matrix[mx][my]==target:
+                        #do Binary search in that row
+                        return True
+                    elif matrix[mx][my]>target:
+                        h=m-1
+                    else:
+                        l=m+1
+
+                return False

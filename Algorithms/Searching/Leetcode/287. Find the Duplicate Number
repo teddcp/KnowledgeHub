@@ -1,0 +1,17 @@
+
+
+
+
+Solution 2: Floyd's Tortoise and Hare (Cycle Detection) 
+
+Detecting Loop:
+
+Have two pointers, classically called hare and tortoise. Move hare by 2 steps and tortoise by 1. If they meet at some point, then there is surely a cycle and the meeting point is obviously inside the cycle.
+
+Finding length of Loop:
+
+Keep one pointer fixed at meeting point while increment the other until they are same again. Increment a counter as you go along and the counter value at meet will be the length of cycle.
+
+Find the start of cycle
+
+Take one pointer to start of the list and keep the other at the meeting point. Now increment both by one and the meet point is the start of loop.

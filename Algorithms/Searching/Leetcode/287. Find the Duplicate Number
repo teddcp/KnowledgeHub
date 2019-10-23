@@ -1,0 +1,84 @@
+Sorting and hashing will also work but here the condition is we have to find the answer without modifying the array and without any extra space.
+
+Solution 1:  Binary Search O(nlgn)
+ for sorting, even if it is sorted,we have to count the number <=mid for each iteration
+ 
+This solution is based on binary search.
+
+At first the search space is numbers between 1 to n. Each time I select a number mid (which is the one in the middle) and count all the numbers equal to or less than mid. Then if the count is more than mid, the search space will be [1 mid] otherwise [mid+1 n]. I do this until search space is only one number.
+
+Let's say n=10 and I select mid=5. Then I count all the numbers in the array which are less than equal mid. If the there are more than 5 numbers that are less than 5, then by Pigeonhole Principle (https://en.wikipedia.org/wiki/Pigeonhole_principle) one of them has occurred more than once. So I shrink the search space from [1 10] to [1 5]. Otherwise the duplicate number is in the second half so for the next step the search space would be [6 10].
+
+    def findDuplicate(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        l,r=0,len(nums)
+        
+        while l<r:
+            m=(l+r)//2
+            x= len([i  for i in nums if i<=m ])
+            
+            if x>m:
+                r=m
+            else:
+                l=m+1
+        
+        return l
+        
+Solution2:Floyd's Tortoise and Hare (Cycle Detection) O(n)
+
+Detect whether there is a cycle in the list
+Find the starting point of the cycle (i.e. list 1->4->3->4, starting point is 4)
+Decide the length of the cycle (i.e. 2 for above example)
+-----------------------------------
+The algorithm idea is following:
+1.We use two pointers: tortoise and hare. Both start at the beginning of the list. Hare runs twice as fas the tortoise.
+
+2.If there is no-cycle, then hare will reach the finish line before the tortoise.
+
+3.If there is a cycle, then hare will always be ahead and eventually he would so far ahead that he laps the tortoise. That's the place 
+
+4.we know we have a cycle in the list.Once we detect the cycle, we send hare back to the beginning and advance both of them at the same speed until they meet again. The second meeting place, which we'll prove immediately, is the entry point of the cycle.
+Then, one of them will keep moving to finish the victory lap to find the period of the cycle.
+-------------------------------------
+Detecting Loop:
+Have two pointers, classically called hare and tortoise. Move hare by 2 steps and tortoise by 1. If they meet at some point, then there is surely a cycle and the meeting point is obviously inside the cycle.
+
+Finding length of Loop:
+Keep one pointer fixed at meeting point while increment the other until they are same again. Increment a counter as you go along and the counter value at meet will be the length of cycle.
+
+Find the start of cycle
+Take one pointer to start of the list and keep the other at the meeting point. Now increment both by one and the meet point is the start of loop. I verified the method using some cases on paper, but I don't understand why it should work.
+-------------------------------------------
+Use two pointers the fast and the slow. The fast one goes forward two steps each time, while the slow one goes only step each time. They must meet the same item when slow==fast. In fact, they meet in a circle, the duplicate number must be the entry point of the circle when visiting the array from nums[0]. Next we just need to find the entry point. We use a point(we can use the fast one before) to visit form begining with one step each time, do the same job to slow. When fast==slow, they meet at the entry point of the circle
+
+According to Floyd's algorithm, first step, if a cycle does exist, and you advance the tortoise one node each unit of time but the hare two nodes each unit of time, then they will eventually meet. This is what the first while loop does. The first while loop finds their meeting point.
+
+*Second step, take tortoise or hare to the start point of the list (i.e. let one of the animal be 0) and keep the other one staying at the meeting point. Now, advance both of the animals one node each unit of time, the meeting point is the starting point of the cycle. This is what the second while loop does. The second while loop finds their meeting point.
+
+    def findDuplicate(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        slow=nums[0]
+        fast=nums[nums[0]]
+        
+        while slow!=fast:
+            slow=nums[slow]
+            fast=nums[nums[fast]]
+        ptr=0
+        
+        while ptr!=slow:
+            ptr=nums[ptr]
+            slow=nums[slow]
+        
+        return slow
+        
+ 
+ https://leetcode.com/problems/find-the-duplicate-number/discuss/72929/O(nlogN)-Binary-Search-and-O(n)-Circle-Detect
+ https://leetcode.com/problems/find-the-duplicate-number/discuss/72846/My-easy-understood-solution-with-O(n)-time-and-O(1)-space-without-modifying-the-array.-With-clear-explanation.
+ 
+https://cs.stackexchange.com/questions/10360/floyds-cycle-detection-algorithm-determining-the-starting-point-of-cycle

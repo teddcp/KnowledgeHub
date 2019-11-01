@@ -1,0 +1,113 @@
+Given two arrays, write a function to compute their intersection.
+
+Solution 1: Brute Force O(m*n)
+----------
+    def intersection(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: List[int]
+        """
+        res=[]
+        
+        for i in nums1:
+            if i in nums2 and i not in res:
+                res.append(i)
+        
+        return res
+ 
+ ***Using sets in python
+      
+      return list(set(nums1)& set(nums2))
+      
+Time complexity :  O(min (m,n) in avg case  and O(m*n) in the worst case .
+Space complexity : O(n+m) in the worst case when all elements in the arrays are different.
+
+solution 2: Using Sorting + Binary Search  nlgn   (If we asuume both have same length)
+---------
+  
+     def intersection(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: List[int]
+        """
+        if len(nums1) < len(nums2):
+            nums1,nums2 = nums2,nums1
+            
+        res = []
+        nums1 = sorted(nums1)
+        nums2 = set(nums2)
+        
+        for i in nums2:
+            
+            l,r = 0,len(nums1)-1
+            
+            while l <=r:
+                m = (l+r)>>1
+                if nums1[m] == i:
+                    res.append(i)
+                    break
+                else:
+                    if nums1[m] < i:
+                        l = m + 1
+                    else:
+                        r = m - 1
+        return res
+ 
+ 
+ Solution 3: Hashing O(m+n)
+        
+        class Solution(object):
+    def intersection(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: List[int]
+        """
+        if len(nums1)<len(nums2):
+            nums1,nums2=nums2,nums1
+            
+        res=[]
+        dict={}
+        
+        for i in nums1:
+            if i in dict:
+                dict[i]+=1
+            else:
+                dict[i]=1
+                
+        for i in nums2:
+            if i in dict and dict[i]>0:
+                res.append(i)
+                dict[i]=0
+        
+        return res
+        
+Solution 4: 2 Pointer metod nlgn
+
+    
+    def intersection(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: List[int]
+        """
+        res = set()
+        nums1.sort()
+        nums2.sort()
+        
+        i = j = 0
+    
+        while (i < len(nums1) and j < len(nums2)):
+            if nums1[i] > nums2[j]:
+                j += 1
+            elif nums1[i] < nums2[j]:
+                i += 1
+            else:
+                res.add(nums1[i])
+                i += 1
+                j += 1
+    
+        return list(res)
+		

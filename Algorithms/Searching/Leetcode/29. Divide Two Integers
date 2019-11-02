@@ -1,0 +1,70 @@
+
+solution 1: Brute Force 
+      def divide(dividend, divisor):  
+  
+    # Calculate sign of divisor i.e., 
+    # sign will be negative only iff 
+    # either one of them is negative 
+    # otherwise it will be positive 
+    sign = -1 if ((dividend < 0) ^  (divisor < 0)) else 1
+      
+    # Update both divisor and 
+    # dividend positive 
+    dividend = abs(dividend) 
+    divisor = abs(divisor) 
+      
+    # Initialize the quotient 
+    quotient = 0
+    while (dividend >= divisor):  
+        dividend -= divisor 
+        quotient += 1
+      
+      
+    return sign * quotient 
+  
+  
+  
+  
+  Solution 2: Binary Search 
+            res=0
+        l=0
+        r=dividend
+        
+        while l<=r:
+            m=(l+r)//2
+            
+            if m*divisor== dividend:
+                res=m
+                break
+            elif m*divisor<dividend:
+                res=m
+                l=m+1
+            else:
+                r=m-1
+        return res*sign
+        
+Solution 3:  ??
+      def divide(self, dividend, divisor):
+        """
+        :type dividend: int
+        :type divisor: int
+        :rtype: int
+        """
+        if divisor == 0 or (dividend == -2147483648  and divisor == -1)  :
+            return 2147483647
+        
+        sign = 1 if (dividend > 0 and divisor > 0) or (dividend < 0 and divisor < 0) else -1
+        dividend = abs(dividend)
+        divisor = abs(divisor)
+        q=0
+        
+        while dividend>=divisor:
+            t=0;k=divisor
+            while dividend>=k:
+                dividend-=k
+                k<<=1
+                q+=1<<t
+                t+=1
+        return q*sign
+        
+        

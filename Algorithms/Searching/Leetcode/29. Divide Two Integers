@@ -72,7 +72,8 @@ solution 4:  Doubt in the time complexity part....
 
  O(log(answer)) = O(log(dividend // divisor)) = O(log(dividend) - log(divisor))
  
- <a href=https://leetcode.com/problems/divide-two-integers/discuss/179759/Python-7-lines-(beats-99)%3A-How-you-learned-to-divide-when-you-were-7-years-old>link</a>
+https://leetcode.com/problems/divide-two-integers/discuss/179759/Python-7-lines-(beats-99)%3A-How-you-learned-to-divide-when-you-were-7-years-old
+
 
 class Solution(object):
     def divide(self, dividend, divisor):

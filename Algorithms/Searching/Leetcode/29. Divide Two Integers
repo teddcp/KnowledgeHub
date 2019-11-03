@@ -68,7 +68,11 @@ Solution 3:  (log(dividend/divisor))^2
         return q*sign
         
 
-solution 4:
+solution 4:  Doubt in the time complexity part....
+
+ O(log(answer)) = O(log(dividend // divisor)) = O(log(dividend) - log(divisor))
+ 
+ <a href=https://leetcode.com/problems/divide-two-integers/discuss/179759/Python-7-lines-(beats-99)%3A-How-you-learned-to-divide-when-you-were-7-years-old>link</a>
 
 class Solution(object):
     def divide(self, dividend, divisor):
@@ -94,27 +98,21 @@ class Solution(object):
 
         #find the maxium number of time we need to iterate over dividend
         #by increasing divisor exponentially
-
+        # i.e Determine how far left to shift the divisor.
+        
         #it will run lgx time
-        while dd>=x:
+        while (x<<c) <= dd:
                 c+=1
-                b=b<<1
-                x*=2
-
-                if x*2>dd:
-                        break
                 
-        #print(x,b,c)
-
         q=0
 
+        #then subtract from dividend and update result as usual manner
+        
         #will run c time i.e lgx time
-        for i in range(c,-1,-1):
-                if dd>=x:
-                        dd-=x
-                        q+=b
-                x//=2
-                b//=2
+        for j in range(c-1,-1,-1):
+                if x<<j <= dr:
+                        dr=dr- x<<j
+                        q+=1<<j
                 
         return q*sign
 

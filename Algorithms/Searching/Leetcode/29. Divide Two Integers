@@ -43,7 +43,7 @@ solution 1: Brute Force
                 r=m-1
         return res*sign
         
-Solution 3:  ??
+Solution 3:  (log(dividend/divisor))^2
       def divide(self, dividend, divisor):
         """
         :type dividend: int
@@ -67,4 +67,59 @@ Solution 3:  ??
                 t+=1
         return q*sign
         
+
+solution 4:
+
+class Solution(object):
+    def divide(self, dividend, divisor):
+        """
+        :type dividend: int
+        :type divisor: int
+        :rtype: int
+        """
+        if divisor == 0 or (dividend == -2147483648  and divisor == -1)  :
+            return 2147483647
+        if divisor == 1 : 
+            return dividend
+        if divisor == -1 : 
+            return -dividend
         
+        sign = 1 if (dividend > 0 and divisor > 0) or (dividend < 0 and divisor < 0) else -1
+        dd = abs(dividend)
+        dr = abs(divisor)
+        
+        x=dr
+        c=0
+        b=1
+
+        #find the maxium number of time we need to iterate over dividend
+        #by increasing divisor exponentially
+
+        #it will run lgx time
+        while dd>=x:
+                c+=1
+                b=b<<1
+                x*=2
+
+                if x*2>dd:
+                        break
+                
+        #print(x,b,c)
+
+        q=0
+
+        #will run c time i.e lgx time
+        for i in range(c,-1,-1):
+                if dd>=x:
+                        dd-=x
+                        q+=b
+                x//=2
+                b//=2
+                
+        return q*sign
+
+        '''
+        total time complexity will be 2lgx i.e lgx
+        '''
+                
+            

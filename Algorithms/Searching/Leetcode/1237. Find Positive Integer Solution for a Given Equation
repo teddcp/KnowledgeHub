@@ -32,8 +32,12 @@ def findSolution(self, customfunction, z):
         
         
  Solution 3:
- 
-		###BINAR SEARCH  xlogy
+ Solution based on linear scan by one axis + binary search by second axis. Because function is increasing we can use binary search and limit next search to left of right halves depends on how f() and z are related.
+Optimization catch is to make a check if the binary search make sense for one x at all - check at the beggining if f(x,1) < z < f(x,1000) and skip the whole iteration otherwise.
+
+O(1) for time because we do xlgy iterations, but x and y are defined as 1<=x,y<=1000, thus 1000xlg1000 = O(1). O(1) space - jsut several state variables.
+
+###BINAR SEARCH  xlogy
 def findSolution(self, customfunction, z):
         """
         :type num: int
@@ -44,6 +48,11 @@ def findSolution(self, customfunction, z):
         
         
         for i in range(1,1001):
+	    ######CATCH#####
+	    if customfunction.f(i,1)>z or  customfunction.f(i,1000)<z :
+                break
+		
+		
             l=1
             r=1000
             while l<=r:

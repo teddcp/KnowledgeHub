@@ -1,0 +1,90 @@
+This question is  an extension of the previous  Intersection of Two Arrays . The difference is that this question allows you to return duplicate numbers, and returns as much as possible. 
+
+(Leetcode question 349) :The previous question is that there are duplicate numbers that return only one.
+
+
+ nlgn 
+        nums1.sort()
+        nums2.sort()
+        
+        res = []
+        i = j = 0
+    
+        while (i < len(nums1) and j < len(nums2)):
+            if nums1[i] > nums2[j]:
+                j += 1
+            elif nums1[i] < nums2[j]:
+                i += 1
+            else:
+                res+=[nums1[i]]
+                i += 1
+                j += 1
+    
+        return res
+		
+		
+Hashing
+
+def intersect(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: List[int]
+        """
+        if len(nums1)<len(nums2):
+            nums1,nums2=nums2,nums1
+            
+        res=[]
+        dict={}
+        
+        for i in nums1:
+            if i in dict:
+                dict[i]+=1
+            else:
+                dict[i]=1
+                
+        for i in nums2:
+            if i in dict and dict[i]>0:
+                res.append(i)
+                dict[i]-=1
+        
+        return res
+		
+###Binary Search : mlgm +nlgn
+
+def intersect(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: List[int]
+        """
+        if len(nums1) < len(nums2):
+            nums1,nums2 = nums2,nums1
+            
+        res = []
+        nums1 = sorted(nums1)
+        
+        for i in nums2:
+            
+            l,r = 0,len(nums1)-1
+            
+            while l <=r:
+                m = (l+r)>>1
+                if nums1[m] == i:
+                    res.append(i)
+                    del nums1[m]
+                    break
+                else:
+                    if nums1[m] < i:
+                        l = m + 1
+                    else:
+                        r = m - 1
+        return res
+        
+https://medium.com/@lenchen/leetcode-350-intersection-of-two-arrays-ii-1affad47cb15
+https://blog.csdn.net/coder_orz/article/details/51496278
+
+
+Solution 1: 2 pointer
+Solution2: hashing
+Solution 3: ??

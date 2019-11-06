@@ -59,13 +59,14 @@ Solution 1: //Binary search
         
         return int(a)
   or |||||||||||||||||||||||||||||||||||||||
-   t=x
+           
         
-        while t**2 >x :
-            t=int(0.5 *(t+(x//t)))
-        
-        return t
+        r = x
+        while r*r > x:
+            r = (r + x/r) / 2
+        return r
        ----------------------------------------
+   
    Using Logarithimic
        pow(2, 0.5 * math.log2(n))
        

@@ -1,0 +1,67 @@
+Solution 1: sqrt(n)
+    whether a number is a perfect square or not just by subtracting odd numbers(1,3,5...) from the given number. If the answer reaches zero at any point, which means the given number is a perfect square else its not.
+example:
+lets say 36
+subtracting odd numbers step by step
+36-1 = 35, 35-3=32, 32-5=27, 27-7=20, 20-9 = 11, and 11-11 ==0 (so its a perfect square)
+
+a=1
+while(num >= 0):
+       if num == 0:
+		   return True
+       num -=a
+       a+=2
+return False
+
+Solution 2 : naive approach sqrt(n)
+  
+  def isPerfectSquare(self, num):
+        """
+        :type num: int
+        :rtype: bool
+        """
+        
+        i = 1
+        while i ** 2 <= num:
+            if i ** 2 == num:
+                return True
+            else:
+                i += 1
+        return False
+
+Solution 3: Constant time {NEWTON's Method}
+    def isPerfectSquare(self, num):
+        if num < 0: return False
+        if num <= 1: return True
+        r = num//2   #Better to start with n/2 than n
+        while r*r > num:
+            r = (r + num//r) // 2
+        
+        return r*r == num
+    
+
+
+Solution 4: Binary Search
+Binary Search lgn
+
+    def isPerfectSquare(self, num):
+        """
+        :type num: int
+        :rtype: bool
+        """
+        
+        l=1
+        r=num
+        
+        while l<=r:
+            m=(l+r)//2
+            res=m*m
+            
+            if res==num:
+                return True
+            elif res<num:
+                l=m+1
+            else:
+                r=m-1
+        
+        return False

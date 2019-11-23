@@ -1,0 +1,98 @@
+Solution 1: Sorting
+    return sorted(s) == sorted(t)
+    
+here actually use Python sort a lot of convenience, but note that sorted(s)the return is actually an array of characters, so the code above sorted(s) == sorted(t)comparison is to compare an array rather than a string comparison.
+This algorithm is also valid for strings containing unicode.
+
+Solution 2: Array of 26 chars
+  
+  The more intuitive idea is to count the number of occurrences of different characters in two strings. Only when the characters appearing the same and appear the same number of times, they are "anagram". In addition, two strings of different lengths must not meet the requirements and can assist in the judgment.
+To determine whether the number of occurrences of characters is equal, you can compare and compare the two (using two arrays), or you can compare one side with one minus one (one array can be used).
+
+
+To examine if t is a rearrangement of s, we can count occurrences of each letter in the two strings and compare them. Since both s and t contain only letters from a-z, a simple counter table of size 26 is suffice.
+Do we need two counter tables for comparison? Actually no, because we could increment the counter for each letter in s and decrement the counter for each letter in t, then check if the counter reaches back to zero.
+Or we could first increment the counter for s, then decrement the counter for t. If at any point the counter drops below zero, we know that t contains an extra letter not in s and return false immediately.
+
+(Using 2 arrays)
+  
+     def isAnagram(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: bool
+        """
+        if len(s) != len(t):
+            return False
+
+        alpha = [0] * 26
+        beta = [0] * 26
+        for c in s:
+            alpha[ord(c) - 97] += 1
+        for c in t:
+            beta[ord(c) - 97] += 1
+        return alpha == beta
+
+(Using one array)
+        
+        if len(s) != len(t):
+            return False
+
+        alpha = [0] * 26
+        for c in s:
+            alpha[ord(c) - 97] += 1
+        for c in t:
+            alpha[ord(c) - 97] -= 1
+            if alpha[ord(c) - 97] < 0:
+                return False
+        return True
+
+
+
+Solution 3: Dictionary  (Acceptable for Unicod chars)
+  
+    def isAnagram(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: bool
+        """
+        if len(s) != len(t):
+            return False
+
+        alpha = {}
+        beta = {}
+        for c in s:
+            alpha[c] = alpha.get(c, 0) + 1
+        for c in t:
+            beta[c] = beta.get(c, 0) + 1
+        return alpha == beta
+
+
+(Using one dictionary)
+      
+      def isAnagram(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: bool
+        """
+        
+        if len(s) != len(t):
+            return False
+
+        alpha = {}
+        
+        for c in s:
+            alpha[c] = alpha.get(c, 0) + 1
+        for c in t:
+            alpha[c] = alpha.get(c,0)-1
+            if alpha[c]<0:
+                return False
+        return True
+
+----------------------------------------------------------------
+
+What if the inputs contain unicode characters? How would you adapt your solution to such case?
+
+Answer: Use a hash table instead of a fixed size counter. Imagine allocating a large size array to fit the entire range of unicode characters, which could go up to more than 1 million. A hash table is a more generic solution and could adapt to any range of characters.

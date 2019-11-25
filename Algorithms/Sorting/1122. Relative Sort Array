@@ -1,0 +1,21 @@
+Explanation
+Save the order of B to a hashmap k,
+because we'll use it again and again.
+
+Sort A and take k[a] as the key.
+If a not in k, take 1000 + a as key.
+
+
+Complexity
+Time O(AlogA + B)
+O(B) extra space,
+O(A) spacefor output
+
+
+def relativeSortArray(self, A, B):
+        k = {b: i for i, b in enumerate(B)}
+        return sorted(A, key=lambda a: k.get(a, 1000 + a))
+
+1-line for fun
+    def relativeSortArray(self, A, B):
+        return sorted(A, key=(B + sorted(A)).index)

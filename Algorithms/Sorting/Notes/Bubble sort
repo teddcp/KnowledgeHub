@@ -1,0 +1,48 @@
+A bubble sort algorithm iterates through the list or array that it is given, and compares each pair of adjacent elements in the list by size. If they elements are in the incorrect order, it swaps them, and then moves on to the next pair of elements.
+
+
+        def bubbleSort(a): 
+          if not a or len(a) == 1: 
+            return a 4 n = len(a) 
+
+          for i in range(n − 1): #n−1 passes
+              for j in range(n − i − 1): #each pass will have valid window [0 , n−i ] , and j is the starting index of each pair
+                  if a[ j ] > a[ j + 1]: 
+                      a[ j ] , a[ j + 1] = a[ j + 1] , a[ j ] #swap 
+          return a 
+
+In the code, we use a[j] > a[j +1], because when there the pair has equal values, we do not need to swap them. The advantage of doing so is (1) to save unnecessary swaps and (2) keep the original order of items with same keys. This makes bubble sort a stable sort. As we see in bubble sort, there is no extra space needed to sort, this makes it in-place sort.
+
+        1. in-place=yes
+        2. stable :it preserves the relative order of the elements. If we think about it, this makes sense: imagine an array with two instances of a number: [4, 2, 3, 3]. When comparing the two instances of 3, the algorithm won’t swap them if the one on the left isn’t larger than the one on the right. Thus, their relative order would remain the same.
+
+        o(n^2)
+        we must make n number of iterations through an array of n total elements in order to sort it. We also know that, within each iteration, we must check all n elements in the array.
+
+        3. comparision based
+        4. Internal sorting (not external)
+                This algorithm is also an internal sort, which means that all the data is stored within the main memory of the computer. This is vital to how bubble sort functions because as the algorithm processes data, it needs all of it to exist in one chunk; if this algorithm were external, it would result in even worse performance than it already has, as it would have to reference chunks of memory that could be potentially stored all over the place.
+
+
+
+Complexity Analysis and Optimization
+
+In i-thpass,theitemnumber in the valid window is n − i with n − i −1 maximum of comparison and swap, and we need a total of n −1 passes. The total time will be T = Pn−i i=0 (n−i−1) = n −1 + (n −2) + ... + 2 + 1 = n(n −1)/2 = O(n2). The above implementation runs O(n2) even if the array is sorted. We can optimize the inner for loop by stopping the whole program if no swap is detected in a pass. This can achieve better solution as good ad O(n) if the input is nearly sorted.
+
+Optimized one :
+-------------------
+def bubble_sort(arr):
+        n=len(arr)
+
+        for i in range(n-1):  #n-1 passes
+                swapped=False
+                for j in range(n-i-1):
+                        if arr[j]>arr[j+1]:
+                                swapped=True
+                                arr[j],arr[j+1]=arr[j+1],arr[j]
+                if swapped==False:
+                        break
+        return arr
+
+nums = [3, 5, 2, 1, 6, 4]
+print(bubble_sort(nums))

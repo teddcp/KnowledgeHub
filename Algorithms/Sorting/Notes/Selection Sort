@@ -1,0 +1,60 @@
+A selection sort algorithm sorts through a list of items by iterating through a list of elements, finding the smallest one, and putting it aside into a sorted list. It continues to sort by finding the smallest unsorted element, and adding it to the sorted list.
+
+It keeps track of what is sorted and what is not sorted, and it will continue to sort until the unsorted “list” is completely empty.
+A selection sort algorithm will swap the smallest element it finds in each iteration, and add it to the sorted section of elements.
+
+unstable
+internal
+comaprision based
+in-place
+n^2
+
+Algo:
+--------
+Set the smallest number to be the first element in the list.
+Look through the entire list and find the actual smallest number.
+Swap that value with the item at the index of the smallest number.
+Move on to look at the next unsorted item in the list, repeat steps 2 + 3.
+Continue to do this until we arrive at the last element in the list.
+
+      def bubble_sort(a):
+              n=len(a)
+
+              for i in range(n-1):
+                      min=i
+
+                      for k in range(i+1,n):
+                              if a[k]<a[min]:
+                                      min=k
+
+                      if min!=i:
+                              a[i],a[min]=a[min],a[i]
+
+              return a
+
+The good thing about selection sort is it never makes more than O(n) swaps and can be useful when memory write is a costly operation.
+
+comparsions : o(n^2)
+swaps: O(n)
+
+STABLE SELECTION SORT
+------------------------------
+        #Selection sort can be made Stable if instead of swapping, the minimum element is placed in its position without swapping i.e. by placing the number in its position by pushing every element one step forward.
+def bubble_sort(a):
+        n=len(a)
+
+        for i in range(n-1):
+                min=i
+
+                for k in range(i+1,n):
+                        if a[k]<a[min]:
+                                min=k
+                #a[i],a[min]=a[min],a[i]
+                key=a[min]
+                 #Move lements one by one and place the minimm element at its place
+                while min>i:
+                        a[min]=a[min-1]
+                        min-=1
+                a[i]=key
+                
+        return a

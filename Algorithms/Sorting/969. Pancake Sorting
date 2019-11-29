@@ -1,0 +1,47 @@
+
+Find the largest element A[i], reverse A[0:i+1], making the current largest at the head of the array, then reverse the whole array to make A[i] at the bottom.
+Do the above again and again, finally we'll have the whole array sorted.
+
+
+      [3,1,4,2] (input array)
+      [4,1,3,2] -> [2,3,1,4] (current maximum 4 is placed at the bottom)
+      [3,2,1,4] -> [1,2,3,4] (current maximum 3 is placed at the bottom)
+      [2,1,3,4] -> [1,2,3,4] (current maximum 2 is placed at the bottom)
+      [1,2,3,4] -> [1,2,3,4] (current maximum 1 is placed at the bottom)
+      done!
+
+<a href="https://assets.leetcode.com/users/omaroh/image_1549128556.png" target='_blank'>image</a>
+
+class Solution(object):
+    def flip(self,arr,i):
+        
+        arr=arr[:i][::-1]+arr[i:]
+        return arr
+        
+    def pancakeSort(self, arr):
+        """
+        :type A: List[int]
+        :rtype: List[int]
+        """
+        
+        if sorted(arr)==arr:
+            return []
+        
+        output = []
+        
+        # find the index of the maxmium element inside the arr[0..curr_size -1]
+        for i in range(len(arr),1,-1):
+            mi = arr.index(max(arr[:i]))+1
+            if mi != i:
+                #flip
+                #arr[:mi]=reversed(arr[:mi])
+                arr=self.flip(arr,mi)
+                output.append(mi)
+                
+                # once I flip it
+                # now move the maximum number to the end by reversing current array
+                #arr[:i]=reversed(arr[:i])
+                arr=self.flip(arr,i)
+                output.append(i)    
+                  
+        return output

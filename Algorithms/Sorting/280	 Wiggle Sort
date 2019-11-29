@@ -6,8 +6,24 @@ Input: nums = [3,5,2,1,6,4]
 Output: One possible answer is [3,5,1,6,2,4]
 
 
+Solution 1 : sort +then check if it satisfies the property arr[0]<=arr[1]>=arr[2]
+--------------- 
+ def sort(arr):
+        arr=sorted(arr)
+        
+        for i in range(2,len(arr),2):
+                arr[i-1],arr[i]=arr[i],arr[i-1]
+        
 
-Traversing nums, if the value of the even index is greater than the next value, the positions are swapped; if the value of the odd index is less than the next value, the positions are swapped.
+        return arr
+        
+    demerit : Time complexity :nlgn 
+              not in-place
+ so we have to find a solution which does in o(n) and in-place
+ 
+solution 2 
+----------------
+Taversing nums, if the value of the even index is greater than the next value, the positions are swapped; if the value of the odd index is less than the next value, the positions are swapped.
 Time: O (n)
 Space: O (1)
 

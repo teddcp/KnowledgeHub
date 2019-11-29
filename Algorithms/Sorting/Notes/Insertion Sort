@@ -1,0 +1,45 @@
+
+
+
+      def sort(a):
+        n=len(a)
+        for i in range(1,n):
+                curr=a[i]
+                j=i-1
+
+                while j>=0 and a[j]>curr:
+                        a[j+1]=a[j]
+                        j-=1
+                a[j+1]=curr
+
+
+        
+        return a
+       
+Time Complexity: O(n*2)
+Let us compute the worst-time complexity of the insertion sort. In sorting the most expensive part is a comparison of two elements. Surely that is a dominant factor in the running time. We will calculate the number of comparisons of an array of N elements:
+we need 0 comparisons to insert the first element
+we need 1 comparison to insert the second element
+we need 2 comparisons to insert the third element
+...
+we need (N-1) comparisons (at most) to insert the last element
+Totally,
+1 + 2 + 3 + ... + (N-1) = O(n2)
+The worst-case runtimecomplexity is O(n2).What is the best-case runtime complexity? O(n). The advantage of insertion sort comparing it to the previous two sorting algorithm is that insertion sort runs in linear time on nearly sorted data.
+
+Auxiliary Space: O(1)
+
+Boundary Cases: Insertion sort takes maximum time to sort if elements are sorted in reverse order. And it takes minimum time (Order of n) when elements are already sorted.
+
+Algorithmic Paradigm: Incremental Approach
+
+Sorting In Place: Yes
+
+Stable: Yes
+
+Online: Yes
+
+Uses: Insertion sort is used when number of elements is small. It can also be useful when input array is almost sorted, only few elements are misplaced in complete big array.
+
+
+The best case running time of running an insertion sort algorithm on a nearly-sorted list ends up being linear — or, O(n) — since far fewer comparisons need to be made by the inner loop.

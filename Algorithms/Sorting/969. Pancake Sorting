@@ -10,7 +10,7 @@ Do the above again and again, finally we'll have the whole array sorted.
       [1,2,3,4] -> [1,2,3,4] (current maximum 1 is placed at the bottom)
       done!
 
-<a href="https://assets.leetcode.com/users/omaroh/image_1549128556.png" target='_blank'>image</a>
+https://assets.leetcode.com/users/omaroh/image_1549128556.png
 
 class Solution(object):
     def flip(self,arr,i):

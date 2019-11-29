@@ -1,0 +1,33 @@
+Given an unsorted array nums, reorder it in-place such that nums [0] <= nums [1]> = nums [2] <= nums [3]…
+
+Example:
+
+Input: nums = [3,5,2,1,6,4]
+Output: One possible answer is [3,5,1,6,2,4]
+
+
+
+Traversing nums, if the value of the even index is greater than the next value, the positions are swapped; if the value of the odd index is less than the next value, the positions are swapped.
+Time: O (n)
+Space: O (1)
+
+Basically, A[0] <= A[1] >= A[2] <= A[3] >= A[4] <= A[5] Let's look into the problem closely. We can see if two consecutive elements are in wiggle sort order i.e. A[i-1]<=A[i]>=A[i+1] then it’s neighbors are also in wiggle order. So we could actually check by even and odd positions –
+
+A[even] <= A[odd],
+A[odd] >= A[even].
+
+Therefore we could go through the array and check this condition does not hold, just swap. Below is a o(n) implementation with swap only.
+
+------------------------------
+
+    def wiggleSort(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: void Do not return anything, modify nums in-place instead.
+        """
+        for i in range(len(nums)-1):
+            if i%2 == 1 and nums[i]< nums[i+1]:
+                nums[i], nums[i+1] = nums[i+1], nums[i]   #swap
+            elif i%2 == 0 and nums[i]> nums[i+1]:
+                nums[i], nums[i+1] = nums[i+1], nums[i]   #swap
+ 

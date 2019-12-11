@@ -1,0 +1,55 @@
+Links to follow
+-------------------
+https://www.youtube.com/watch?v=TzeBrDU-JaY
+https://www.khanacademy.org/computing/computer-science/algorithms/merge-sort/a/analysis-of-merge-sort
+https://www.programiz.com/dsa/merge-sort
+
+Code (python):
+        def merge(l , r): 
+          ' ' 'combine the left and right sorted list ''' 
+          ans = [] 
+          i = j = 0 
+          # two pointers each points at l and r 
+          n, m = len(l) , len(r) 
+          
+          # first while loop to merge 
+          while i < n and j < m: 
+              if l [ i ] <= r[ j ]: 
+                  ans.append(l [ i ]) 
+                  i += 1 
+              else : 
+                  ans.append(r[ j ]) 
+                  j += 1 15 
+         
+         # now one list of l and r might have items left 
+         ans += l [ i :] 
+         ans += r[ j :] 
+         
+         return ans
+         
+         
+         #####Merge Sort#####
+         def mergeSort(a, s , e): 
+                # base case , can not be divided further 
+                if s == e: 4 return [a[s ]] 
+                
+                # divide into two halves from the middle point 
+                m = (s + e) // 2 
+                
+                # conquer 
+                l = mergeSort(a, s , m) 
+                r = mergeSort(a, m+1, e) 
+                
+                # combine 
+                return merge(l , r) 
+                
+  In the code, we use l[i] <= r[j] instead of l[i] < r[j] is because when there are items of equal keys, we should put the ones in the left ﬁrst in the merged list. Therefore, our merge sort is stable.
+  
+  But not in place as it takes an extra array of o(n)
+  
+  time complexity:
+  T(n)=2T(n/2)+O(n)   ---> nlgn
+  
+  space complexity
+  o(n)
+        

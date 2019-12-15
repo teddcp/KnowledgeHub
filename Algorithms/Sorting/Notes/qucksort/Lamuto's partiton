@@ -1,0 +1,77 @@
+#Lomuto's partiton
+
+Here 2 programes are written.
+  1. using last element as pivolt
+  2. randmizing to imporve the stability
+
+                  '''
+                  #Lamuto's partition
+                  #returns the index of pivolt
+                  #that's why quick sort call s to p-1 and p+1 to e
+
+                  def partition(a,s,e):
+                      p=a[e]
+                      i=s-1
+
+                      for j in range(s,e):
+                          if a[j]<p:
+                              i+=1
+                              a[i],a[j]=a[j],a[i]
+
+                      a[i+1],a[e]=a[e],a[i+1]
+                      return i+1
+
+
+                  def quicksort(a,s,e):
+                      if s<e:
+                          #pivolt
+                          p = partition(a, s , e)
+
+                          # conquer smaller problem
+                          quicksort(a, s , p-1)
+                          quicksort(a, p+1, e)
+
+                  X=[4,5,7,4,3,82,0,4,22,45,82]
+                  quicksort(X,0,len(X)-1)
+                  print(X)
+                  '''
+
+      #Randomizing
+
+      #3
+      def partition(a,s,e):
+          p=a[e]
+          i=s-1
+
+          for j in range(s,e):
+              if a[j]<p:
+                  i+=1
+                  a[i],a[j]=a[j],a[i]
+
+          a[i+1],a[e]=a[e],a[i+1]
+          return i+1
+
+      #2
+      def partition_rand(arr,s,e):
+          import random
+          p=random.randrange(s,e) #genrates an random num between s and e i.e and index
+
+          #swapping with last element
+          arr[e],arr[p]=arr[p],arr[e]
+
+          #calling the partition (as usual)
+          return partition(arr,s,e)
+
+      #1
+      def quicksort(a,s,e):
+          if s<e:
+              #pivolt
+              p = partition_rand(a, s , e)
+
+              # conquer smaller problem
+              quicksort(a, s , p-1)
+              quicksort(a, p+1, e)
+
+      X=[4,5,7,4,3,82,0,4,22,45,82]
+      quicksort(X,0,len(X)-1)
+      print(X)

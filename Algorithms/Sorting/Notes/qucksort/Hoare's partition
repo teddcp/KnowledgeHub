@@ -1,3 +1,13 @@
+Comparison:
+
+Hoare’s scheme is more efficient than Lomuto’s partition scheme because it does three times fewer swaps on average, and it creates efficient partitions even when all values are equal.
+
+Like Lomuto’s partition scheme, Hoare partitioning also causes Quicksort to degrade to O(n^2) when the input array is already sorted, it also doesn’t produce a stable sort.
+
+Note that in this scheme, the pivot’s final location is not necessarily at the index that was returned, and the next two segments that the main algorithm recurs on are (lo..p) and (p+1..hi) as opposed to (lo..p-1) and (p+1..hi) as in Lomuto’s scheme.
+
+
+
 def partition(nums, low, high):
     # We select the middle element to be the pivot. Some implementations select
     # the first element or the last element. Sometimes the median value becomes
@@ -44,3 +54,12 @@ def quick_sort(nums):
 random_list_of_nums = [3,7,8,5,2,1,9,5,4]
 quick_sort(random_list_of_nums)
 print(random_list_of_nums)
+
+
+
+
+For randomized version, we can proceeed like we did in lamuto's.
+
+1.select an index randomly and swap it with first element
+2.then call partition 
+3.Rest are same

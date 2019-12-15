@@ -1,0 +1,21 @@
+Worst-case analysis
+The most unbalanced partition occurs when one of the sublists returned by the partitioning routine is of size n − 1.[27] This may occur if the pivot happens to be the smallest or largest element in the list, or in some implementations (e.g., the Lomuto partition scheme as described above) when all the elements are equal.
+ 
+ T(n)=O(n)+T(0)+T(n-1)=O(n)+T(n-1).
+  
+If this happens repeatedly in every partition, then each recursive call processes a list of size one less than the previous list. Consequently, we can make n − 1 nested calls before we reach a list of size 1. This means that the call tree is a linear chain of n − 1 nested calls. The ith call does O(n − i) work to do the partition, and {\displaystyle \textstyle \sum _{i=0}^{n}(n-i)=O(n^{2})}\textstyle \sum _{i=0}^{n}(n-i)=O(n^{2}), so in that case Quicksort takes O(n²) time.
+
+Best-case analysis
+In the most balanced case, each time we perform a partition we divide the list into two nearly equal pieces. This means each recursive call processes a list of half the size. Consequently, we can make only log2 n nested calls before we reach a list of size 1. This means that the depth of the call tree is log2 n. But no two calls at the same level of the call tree process the same part of the original list; thus, each level of calls needs only O(n) time all together (each call has some constant overhead, but since there are only O(n) calls at each level, this is subsumed in the O(n) factor). The result is that the algorithm uses only O(n log n) time.
+    
+    T(n)=O(n)+2T(n/2)  =>  T(n) = O(n log n)
+    
+Average-case analysis
+To sort an array of n distinct elements, quicksort takes O(n log n) time in expectation, averaged over all n! permutations of n elements with equal probability. We list here three common proofs to this claim providing different insights into quicksort's workings.
+
+Assume that there are no duplicates as duplicates could be handled with linear time pre- and post-processing, or considered cases easier than the analyzed. When the input is a random permutation, the rank of the pivot is uniform random from 0 to n − 1. Then the resulting parts of the partition have sizes i and n − i − 1, and i is uniform random from 0 to n − 1. So, averaging over all possible splits and noting that the number of comparisons for the partition is n − 1, the average number of comparisons over all permutations of the input sequence can be estimated accurately
+
+(Refer wikipedia for more)
+
+https://en.wikipedia.org/wiki/Quicksort
+https://www.youtube.com/watch?v=3Bbm3Prd5Fo

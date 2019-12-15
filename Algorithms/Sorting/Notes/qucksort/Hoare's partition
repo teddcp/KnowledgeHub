@@ -63,3 +63,8 @@ For randomized version, we can proceeed like we did in lamuto's.
 1.select an index randomly and swap it with first element
 2.then call partition 
 3.Rest are same
+
+
+Links
+https://cs.stackexchange.com/questions/97727/hoare-partitioning-scheme-in-quicksort
+https://stackoverflow.com/questions/39665299/understanding-quicksort

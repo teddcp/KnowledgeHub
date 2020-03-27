@@ -1,0 +1,30 @@
+// using Fetch api
+
+let url = new URL("http://www.omdbapi.com/?i=tt3896198");
+let params = { apikey: "17bf952b", s: "Kung Fu Panda" };
+
+url.search = new URLSearchParams(params).toString();
+
+fetch(url)
+  .then(data => {
+    let x = data.json();
+    console.log(x);
+    return x;
+  })
+  .then(movies => {
+    for (movie of movies.Search) {
+      console.log(movie.Title);
+    }
+  })
+  .catch(err => console.log("ERROR-> ", err));
+
+//AXios
+axios
+  .get("http://www.omdbapi.com/?i=tt3896198", {
+    params: {
+      apikey: "17bf952b",
+      s: "Kung Fu Panda"
+    }
+  })
+  .then(response => console.log(response))
+  .catch(err => console.log("Error", err));

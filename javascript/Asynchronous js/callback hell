@@ -1,0 +1,117 @@
+
+How can you avoid callback hells?
+
+
+            getData(function(a) {
+              getMoreData(a, function(b) {
+                getMoreData(b, function(c) {
+                  getMoreData(c, function(d) {
+                    getMoreData(d, function(e) {
+                      // ...
+                    })
+                  })
+                })
+              })
+            })
+
+
+            //callback hell
+
+            getDetails();
+
+            function getDetails() {
+              setTimeout(() => {
+                const recipeId = [100, 200, 300, 400, 500];
+                console.log("First level called....", recipeId);
+                setTimeout(
+                  id => {
+                    const dishes = { 100: "veg roll", 200: "burger" };
+                    console.log("2nd level called...", dishes[id]);
+                    setTimeout(
+                      item => {
+                        const price = { roll: 200, burger: 500 };
+                        console.log("3rd level called...", price[item]);
+                      },
+                      1500,
+                      dishes[id]
+                    );
+                  },
+                  1500,
+                  recipeId[1]
+                );
+              }, 1500);
+            }
+
+
+         //Promise
+         const getDetails = function() {
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              const recipeId = [100, 200, 300];
+              console.log("1st level called...", recipeId);
+              resolve(recipeId[1]);
+            }, 1500);
+          });
+        };
+
+        const getrecipe = function(param) {
+          return new Promise((resolve, reject) => {
+            setTimeout(
+              p => {
+                const dishes = { 100: "veg roll", 200: "burger" };
+                console.log("2nd level called...", dishes[p]);
+                resolve(dishes[p]);
+              },
+              1500,
+              param
+            );
+          });
+        };
+
+        const getPrice = function(dish) {
+          return new Promise((resolve, reject) => {
+            setTimeout(
+              item => {
+                const price = { roll: 200, burger: 500 };
+                console.log("3rd level called...", price[item]);
+                //resolve()
+              },
+              1500,
+              dish
+            );
+          });
+        };
+
+        getDetails()
+          .then(getrecipe)
+          .then(getPrice)
+          .catch(err => {
+            console.log("Error", err);
+          });
+
+
+
+
+
+
+Answer
+Refactoring the functions to return promises and using async/await is usually the best option. Instead of supplying the functions with callbacks that cause deep nesting, they return a promise that can be awaited and will be resolved once the data has arrived, allowing the next line of code to be evaluated in a sync-like fashion.
+
+The above code can be restructured like so:
+
+          async function asyncAwaitVersion() {
+            const a = await getData()
+            const b = await getMoreData(a)
+            const c = await getMoreData(b)
+            const d = await getMoreData(c)
+            const e = await getMoreData(d)
+            // ...
+          }
+          
+          
+There are lots of ways to solve the issue of callback hells:
+
+Modularization: break callbacks into independent functions
+Use a control flow library, like async
+Use generators with Promises
+Use async/await (from v7 on)
